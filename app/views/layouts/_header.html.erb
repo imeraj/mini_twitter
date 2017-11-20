@@ -1,11 +1,48 @@
-<header class="navbar navbar-fixed-top navbar-inverse"> <div class="container">
-    <%= link_to "miniTwitter app", root_path, id: "logo" %>
+<header class="navbar navbar-fixed-top navbar-inverse">
+  <div class="container">
+    <%= link_to "miniTwitter", root_path, id: "logo" %>
     <nav>
       <ul class="nav navbar-nav navbar-right">
         <li><%= link_to "Home", root_path %></li>
         <li><%= link_to "Help", help_path %></li>
-        <li><%= link_to "Log in", '#' %></li>
+        <% if logged_in? %>
+            <li><%= link_to "Users", users_path %></li>
+            <li>
+            <div class="dropdown">
+              <button onclick="myFunction()" class="dropbtn">
+                Account <b class="caret"></b></button>
+              <div id="myDropdown" class="dropdown-content">
+                     <%= link_to "Profile", current_user %>
+                    <%= link_to "Settings", edit_user_path(current_user) %>
+                    <%= link_to "Log out", logout_path, method:"delete" %>
+              </div>
+            </div>
+            </li>>
+        <% else %>
+            <li><%= link_to "Log in", login_path %></li>
+        <% end %>
       </ul>
     </nav>
   </div>
+
+  <script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    // Close the dropdown if the user clicks outside of it
+    window.onclick = function(event) {
+        if (!event.target.matches('.dropbtn')) {
+
+            var dropdowns = document.getElementsByClassName("dropdown-content");
+            var i;
+            for (i = 0; i < dropdowns.length; i++) {
+                var openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+  </script>
 </header>
