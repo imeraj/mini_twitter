@@ -35,7 +35,10 @@ gem 'jbuilder', '~> 2.5'
 gem 'bootstrap-sass', '3.3.7'
 gem 'bcrypt',         '3.1.11'
 gem 'faker',          '1.7.3'
-
+gem 'carrierwave',    '1.2.1'
+gem 'mini_magick',    '4.7.0'
+gem 'fog',            '1.40.0'
+gem 'jquery-rails',   '4.2.2'
 gem 'will_paginate',           '3.1.5'
 gem 'bootstrap-will_paginate', '1.0.0'
 
