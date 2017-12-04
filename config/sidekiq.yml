@@ -1,0 +1,7 @@
+:concurrency: 1
+:queues:
+  - default
+  - mailers
+
+  - miniTwitter_default
+  - miniTwitter_mailers

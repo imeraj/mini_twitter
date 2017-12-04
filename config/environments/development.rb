@@ -52,6 +52,11 @@ Rails.application.configure do
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
 
+  config.active_job.queue_adapter = :sidekiq
+  config.active_job.queue_name_prefix = "miniTwitter"
+  config.active_job.queue_name_delimiter = "_"
+  config.redis = { url: 'redis://localhost:6379/0', namespace: "miniTwitter_sidekiq_development" }
+
   host = 'localhost:3000'
   config.action_mailer.default_url_options = { :host => host }
   config.action_mailer.raise_delivery_errors = true

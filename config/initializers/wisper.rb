@@ -1,1 +1,1 @@
-Wisper.subscribe(UserListener.new)
+Wisper.subscribe(EventListener.new)
