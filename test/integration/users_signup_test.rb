@@ -1,10 +1,6 @@
 require 'test_helper'
 
 class UsersSignupTest < ActionDispatch::IntegrationTest
-  def setup
-    ActionMailer::Base.deliveries.clear
-  end
-
   test "invalid signup information" do
       get signup_path
       assert_no_difference 'User.count' do
@@ -35,8 +31,7 @@ class UsersSignupTest < ActionDispatch::IntegrationTest
           }
       end
 
-      # disable below line. deliver_later needs news test for async sending
-      # assert_equal 1, ActionMailer::Base.deliveries.size
+      assert_equal 1, Sidekiq::Worker.jobs.size
       user = assigns(:user)
       assert_not user.activated?
       log_in_as(user)

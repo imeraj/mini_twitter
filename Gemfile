@@ -42,7 +42,7 @@ gem 'jquery-rails',   '4.2.2'
 gem 'will_paginate',           '3.1.5'
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'wisper',         '2.0.0'
-gem 'sidekiq',         '5.0.5'
+gem 'sidekiq',        '5.0.5'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
