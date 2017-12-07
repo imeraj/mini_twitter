@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
-  get 'password_resets/new'
-
-  get 'password_resets/edit'
-
   root 'static_pages#home'
+
+  get 'password_resets/new'
+  get 'password_resets/edit'
 
   get    '/login',   to: 'sessions#new'
   post   '/login',   to: 'sessions#create'
@@ -16,6 +15,8 @@ Rails.application.routes.draw do
   get  '/signup',    to: 'users#new'
   post '/signup',    to: 'users#create'
 
+  get '/search', to: 'search#search'
+
   resources :users do
     member do
       get :following, :followers
@@ -26,5 +27,4 @@ Rails.application.routes.draw do
   resources :password_resets,     only: [:new, :create, :edit, :update]
   resources :microposts,          only: [:create, :destroy]
   resources :relationships,       only: [:create, :destroy]
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

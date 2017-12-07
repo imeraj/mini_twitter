@@ -1,0 +1,25 @@
+<h1>Search Results</h1>
+<ol class="microposts">
+<% if @microposts.any? %>
+    <h3>Microposts (<%= @microposts.count %>)</h3>
+    <% @microposts.each do |micropost| %>
+    <li id="<%= micropost.id %>">
+         <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
+         <span class="user">
+           <%= link_to micropost.user.name, user_path(micropost.user.id) %>
+         </span>
+         <span class="content">
+             <% micropost.highlight.content.each do |snippet| %>
+                    <p><%= snippet.html_safe %></p>
+                <% end %>
+             <%= image_tag micropost.picture.url if micropost.picture? && micropost.picture.url? %>
+    	  </span>
+         <span class="timestamp">
+              Posted <%= time_ago_in_words(micropost.created_at) %> ago.
+         </span>
+    </li>
+    <% end %>
+<% else %>
+  <p>Your search did not match any results.</p>
+<% end %>
+</ol>

@@ -1,4 +1,7 @@
 class User < ApplicationRecord
+  # include Elasticsearch::Model
+	# include Elasticsearch::Model::Callbacks
+
   attr_accessor :remember_token, :activation_token, :reset_token
   before_save { email.downcase! }
   before_create :create_activation_digest
@@ -37,7 +40,8 @@ class User < ApplicationRecord
   # Defines a proto-feed.
   def feed
     following_ids = "SELECT followed_id FROM relationships
-                     WHERE  follower_id = :user_id"
+                     WHERE  follower_id = :user_id
+                     "
     Micropost.where("user_id IN (#{following_ids})
                     OR user_id = :user_id", user_id: id)
   end
@@ -93,6 +97,10 @@ class User < ApplicationRecord
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def followers_ids
+    self.followers.ids
   end
 
   class << self
