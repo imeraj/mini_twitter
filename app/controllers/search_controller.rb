@@ -8,7 +8,7 @@ class SearchController < ApplicationController
     else
       @microposts = Micropost.search(params[:term])
       @microposts = @microposts.select { |s| s.user_id == @user.id or
-                                         s.user.followers_ids.include?(@user.id)
+                                         @user.following?(s.user)
                                        }
     end
   end
