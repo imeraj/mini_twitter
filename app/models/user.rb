@@ -99,10 +99,6 @@ class User < ApplicationRecord
     following.ids.include?(other_user.id)
   end
 
-  def followers_ids
-    self.followers.ids
-  end
-
   class << self
     # Returns the hash digest of the given string.
     def digest(string)
