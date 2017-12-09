@@ -73,4 +73,10 @@ Rails.application.configure do
   	:authentication       => "plain",
   	:enable_starttls_auto => true
   }
+
+  # setup DeltaLogger Middleware for development environment only
+  config.middleware.use DeltaLogger, :info
+
+  config.log_formatter = DeltaFormatter.new
+
 end
