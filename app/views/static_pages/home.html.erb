@@ -24,6 +24,27 @@
       <%= render 'shared/feed' %>
     </div>
   </div>
+
+  <% if logged_in? %>
+  <script src="https://js.pusher.com/4.0/pusher.min.js"></script>
+    <script>
+      // Enable pusher logging - don't include this in production
+      Pusher.logToConsole = true;
+
+      var pusher_client = new Pusher('ce88be7709ffe9b382ea', {
+        encrypted: true
+      });
+
+      var channel = pusher_client.subscribe("miniTwitter-channel");
+      channel.bind("miniTwitter-event-follow-" + "<%= @current_user.id %>", function(data) {
+  			    alert(data.message);
+      });
+
+      channel.bind("miniTwitter-event-logout-" + "<%= @current_user.id %>", function(data) {
+          sessionStorage.removeItem("pusher_client")
+      });
+    </script>
+  <% end %>
 <% else %>
   <div class="center jumbotron">
   	<h1>Welcome to the miniTwitter App</h1>
