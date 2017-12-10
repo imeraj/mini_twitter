@@ -4,7 +4,20 @@ class PusherController < ApplicationController
 
   def auth
     if current_user
-      response = Pusher.authenticate(params[:channel_name], params[:socket_id])
+      channel_name = params[:channel_name]
+      if channel_name.eql?(PUSHER_PRESENCE_CHANNEL)
+        response = Pusher.authenticate(params[:channel_name], params[:socket_id], {
+          user_id: current_user.id,
+          user_info: {
+            name: current_user.name,
+            email: current_user.email
+          }
+        })
+      elsif channel_name.eql?("#{PUSHER_CHANNEL}-#{current_user.id}")
+        response = Pusher.authenticate(params[:channel_name], params[:socket_id])
+      else
+        render text: 'Bad Request', status: '400'
+      end
       render json: response
     else
       render text: 'Forbidden', status: '403'

@@ -2,7 +2,6 @@
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user">
     <%= link_to micropost.user.name, micropost.user %>
-    <%= image_tag("online.png", alt: "Online", height:"8", width:"8") %>
   </span>
   <span class="content">
     <%= micropost.content %>

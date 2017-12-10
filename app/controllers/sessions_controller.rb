@@ -22,9 +22,13 @@ class SessionsController < ApplicationController
   end
 
   def destroy
-    user = current_user
+    user_info =  {
+      id: current_user.id,
+      name: current_user.name,
+      email: current_user.email
+    }
     log_out
-    pusher_trigger_event(:logout, user)
+    pusher_trigger_event(:logout, user_info)
     redirect_to root_url
   end
 

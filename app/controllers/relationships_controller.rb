@@ -5,8 +5,14 @@ class RelationshipsController < ApplicationController
 
   def create
     user = User.find(params[:followed_id])
+    user_info = {
+      id: user.id,
+      name: user.name,
+      email: user.email
+    }
+
     current_user.follow(user)
-    pusher_trigger_event(:follow, user)
+    pusher_trigger_event(:follow, user_info)
     redirect_to user
   end
 
