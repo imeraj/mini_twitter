@@ -35,13 +35,13 @@
         encrypted: true
       });
 
-      var channel = pusher_client.subscribe("miniTwitter-channel");
-      channel.bind("miniTwitter-event-follow-" + "<%= @current_user.id %>", function(data) {
-  			    alert(data.message);
+      var channel = pusher_client.subscribe("miniTwitter-channel-" + "<%= @current_user.id %>");
+      channel.bind("miniTwitter-event-follow", function(data) {
+  			    toastr.info(data.message);
       });
 
-      channel.bind("miniTwitter-event-logout-" + "<%= @current_user.id %>", function(data) {
-          sessionStorage.removeItem("pusher_client")
+      channel.bind("miniTwitter-event-logout", function(data) {
+        pusher.unsubscribe("miniTwitter-channel-" + "<%= @current_user.id %>");
       });
     </script>
   <% end %>

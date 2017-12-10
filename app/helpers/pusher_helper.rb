@@ -8,15 +8,15 @@ module PusherHelper
   end
 
   def pusher_trigger_follow(user)
-    Pusher.trigger(PUSHER_CHANNEL, "#{PUSHER_EVENT_FOLLOW}-#{user.id}", {
+    Pusher.trigger("#{PUSHER_CHANNEL}-#{user.id}", "#{PUSHER_EVENT_FOLLOW}", {
       message: "#{current_user.name} is following you!"
     })
   end
 
   def pusher_trigger_logout(user)
-    Pusher.trigger(PUSHER_CHANNEL, "#{PUSHSER_EVENT_LOGOUT}-#{user.id}", {
+    Pusher.trigger("#{PUSHER_CHANNEL}-#{user.id}", "#{PUSHSER_EVENT_LOGOUT}", {
       message: ""
     })
   end
-  
+
 end
