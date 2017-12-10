@@ -35,7 +35,7 @@
         encrypted: true
       });
 
-      var channel = pusher_client.subscribe("miniTwitter-channel-" + "<%= @current_user.id %>");
+      var channel = pusher_client.subscribe("private-miniTwitter-channel-" + "<%= @current_user.id %>");
       channel.bind("miniTwitter-event-follow", function(data) {
   			    toastr.info(data.message);
       });

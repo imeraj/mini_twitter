@@ -1,5 +1,5 @@
 module PusherHelper
-  PUSHER_CHANNEL = 'miniTwitter-channel'
+  PUSHER_CHANNEL = 'private-miniTwitter-channel'
   PUSHER_EVENT_FOLLOW   = 'miniTwitter-event-follow'
   PUSHSER_EVENT_LOGOUT  = 'miniTwitter-event-logout'
 

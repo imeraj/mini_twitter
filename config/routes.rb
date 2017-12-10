@@ -17,6 +17,8 @@ Rails.application.routes.draw do
 
   get '/search', to: 'search#search'
 
+  post '/pusher/auth', to: 'pusher#auth'
+
   resources :users do
     member do
       get :following, :followers
