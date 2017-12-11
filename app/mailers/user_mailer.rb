@@ -8,7 +8,8 @@ class UserMailer < ApplicationMailer
   def account_activation(user, token)
     @user = user
     @activation_token = token
-    mail to: @user.email, subject: "Account activation"
+    email_with_name = %("#{@user.name}" <#{@user.email}>)
+    mail to: email_with_name, subject: "Account activation"
   end
 
   # Subject can be set in your I18n file at config/locales/en.yml
@@ -19,6 +20,7 @@ class UserMailer < ApplicationMailer
   def password_reset(user, token)
     @user = user
     @reset_token = token
-    mail to: user.email, subject: "Password reset"
+    email_with_name = %("#{@user.name}" <#{@user.email}>)
+    mail to: email_with_name, subject: "Password reset"
   end
 end
