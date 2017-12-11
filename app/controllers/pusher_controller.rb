@@ -15,11 +15,11 @@ class PusherController < ApplicationController
       elsif channel_name.eql?("#{PUSHER_CHANNEL}-#{current_user.id}")
         response = Pusher.authenticate(params[:channel_name], params[:socket_id])
       else
-        render text: 'Bad Request', status: '400'
+        render template: "errors/400", text: 'Bad Request', status: '400'
       end
       render json: response
     else
-      render text: 'Forbidden', status: '403'
+      render template: "errors/403", text: 'Forbidden', status: '403'
     end
   end
 
@@ -40,7 +40,7 @@ class PusherController < ApplicationController
       set_status(offline_ids, false)
       set_status(online_ids, true)
     end
-    render text: 'Unauthorized', status: 401
+    render template: "errors/401", text: 'Unauthorized', status: '401'
   end
 
 end
