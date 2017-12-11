@@ -12,7 +12,8 @@ User.create!(name:  "Example User",
              password_confirmation: "foobar",
              admin: true,
              activated: true,
-             activated_at: Time.zone.now)
+             activated_at: Time.zone.now,
+             online_status: false)
 
 99.times do |n|
   name = Faker::Name.name
@@ -24,7 +25,8 @@ User.create!(name:  "Example User",
                password: password,
                password_confirmation: password,
                activated: true,
-               activated_at: Time.zone.now)
+               activated_at: Time.zone.now,
+               online_status: false)
 
   50.times do
     content = Faker::Lorem::sentence(5)

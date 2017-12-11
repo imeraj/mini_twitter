@@ -1,6 +1,5 @@
 class PusherController < ApplicationController
   skip_before_action :verify_authenticity_token
-  before_action :logged_in_user
 
   def auth
     if current_user
@@ -22,6 +21,26 @@ class PusherController < ApplicationController
     else
       render text: 'Forbidden', status: '403'
     end
+  end
+
+  def webhook
+    online_ids = []
+    offline_ids = []
+
+    webhook = Pusher::WebHook.new(request)
+    if webhook.valid?
+      webhook.events.each do |event|
+        case event["name"]
+          when 'member_added'
+            online_ids << "#{event["user_id"]}".to_i
+          when 'member_removed'
+            offline_ids << "#{event["user_id"]}".to_i
+        end
+      end
+      set_status(offline_ids, false)
+      set_status(online_ids, true)
+    end
+    render text: 'Unauthorized', status: 401
   end
 
 end

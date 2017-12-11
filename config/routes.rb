@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   get '/search', to: 'search#search'
 
   post '/pusher/auth', to: 'pusher#auth'
+  post '/webhook',     to: 'pusher#webhook'
 
   resources :users do
     member do

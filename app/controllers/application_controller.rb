@@ -3,6 +3,7 @@ class ApplicationController < ActionController::Base
 
   include SessionsHelper
   include PusherHelper
+  include UsersHelper
   include Wisper::Publisher
 
 end
