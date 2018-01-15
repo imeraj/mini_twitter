@@ -86,6 +86,32 @@ Rails.application.configure do
     config.logger    = ActiveSupport::TaggedLogging.new(logger)
   end
 
+  config.sign_out_via = :delete
+  config.assets.compile = true
+  config.assets.precompile += %w( * )
+
+  config.active_job.queue_adapter = :sidekiq
+  config.active_job.queue_name_prefix = "miniTwitter"
+  config.active_job.queue_name_delimiter = "_"
+  config.redis = { url: 'redis://localhost:6379/0', namespace: "miniTwitter_sidekiq_production" }
+
+  host = ENV["EMAIL_HOSTNAME"]
+  config.action_mailer.default_url_options = { :host => host }
+  config.action_mailer.raise_delivery_errors = true
+  config.action_mailer.perform_deliveries = true
+
+  ActionMailer::Base.delivery_method = :smtp
+
+  ActionMailer::Base.smtp_settings = {
+    :address              => "smtp.gmail.com",
+    :port                 => "587",
+    :domain               => "gmail.com",
+    :user_name            => "demo.rails007",
+    :password             =>  ENV["EMAIL_PASSWORD"],
+    :authentication       => "plain",
+    :enable_starttls_auto => true
+  }
+
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
 end
