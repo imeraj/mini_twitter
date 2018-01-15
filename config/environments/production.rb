@@ -88,8 +88,7 @@ Rails.application.configure do
 
   config.sign_out_via = :delete
   config.assets.compile = true
-  config.assets.precompile += %w( * )
-
+  
   config.active_job.queue_adapter = :sidekiq
   config.active_job.queue_name_prefix = "miniTwitter"
   config.active_job.queue_name_delimiter = "_"
