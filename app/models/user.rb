@@ -58,7 +58,8 @@ class User < ApplicationRecord
 
   # Sends verification email.
   def send_verification_email
-    UserMailer.account_activation(self, activation_token).deliver_later
+#   UserMailer.account_activation(self, activation_token).deliver_later
+    UserMailer.account_activation(self, activation_token).deliver
   end
 
   # Returns true if the given token matches the digest.
@@ -76,7 +77,8 @@ class User < ApplicationRecord
 
   # Sends password reset email.
   def send_password_reset_email
-    UserMailer.password_reset(self, reset_token).deliver_later
+  #  UserMailer.password_reset(self, reset_token).deliver_later
+    UserMailer.password_reset(self, reset_token).deliver
   end
 
   # Returns true if a password reset has expired.
